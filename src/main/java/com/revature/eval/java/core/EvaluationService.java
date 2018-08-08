@@ -484,29 +484,25 @@ public class EvaluationService {
 	 */
 	
 	public List<Long> calculatePrimeFactorsOf(long l) {
-//		List<Long> li = new ArrayList<>();
-//		boolean prime = true;
-//		
-//		for(long i = 2; i<l+1; i++) {
-//			prime = true;
-//			//check if factor
-//			if(l%i==0) {
-//				//check if prime
-//				for(long j = 2; j<i; j++) {
-//					if(i%j==0) {
-//						prime = false;
-//						break;
-//					}
-//				}
-//			}
-//			
-//			if(prime) {
-//				li.add(i);
-//			}
-//		}
-//		
-//		return li;
-		return new ArrayList<Long>();
+		//store results in result list
+		List<Long> result = new ArrayList<>();
+		
+		//assign value of l to temp, so temp can be adjusted
+		long temp = l;
+		
+		//not including 1 (not prime), iterate up to and including target temp
+		for(int i=2; i<=temp; i++) {
+			
+			//while i goes evenly into temp
+			while(temp%i==0) {
+				//if i is a factor, add to list
+				result.add((long)i);
+				temp = temp/i;
+			}
+		}
+		
+		return result;
+		
 	}
 
 	/**
@@ -539,7 +535,7 @@ public class EvaluationService {
 		private int key;
 
 		public RotationalCipher(int key) {
-			super();//65 90 97 122
+			super();
 			this.key = key;
 		}
 
@@ -557,7 +553,7 @@ public class EvaluationService {
 					newLet = let + this.key;
 					
 					if(newLet > 90) {
-						newLet = (newLet - 90)+65;
+						newLet = (newLet - 90)+65-1;
 					}
 				}
 				//if uppercase character
